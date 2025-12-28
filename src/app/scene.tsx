@@ -5,16 +5,19 @@ import SimulationForm from '../../components/SimulationForm';
 import SimulationResults from '../../components/SimulationResults';
 import { SimulationFormData, SimulationOutputs, Simulation } from '../../lib/types';
 import { runMockSimulation } from '../../lib/mockSimulation';
-import { useSimulations, useCreateSimulation } from '../../hooks/useSimulation';
+import { useSimulations, useCreateSimulation, useUpdateSimulation, useDeleteSimulation } from '../../hooks/useSimulation';
 
 export default function Scene() {
   const [currentOutputs, setCurrentOutputs] = useState<SimulationOutputs | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [loadedSimulationId, setLoadedSimulationId] = useState<string | null>(null);
 
   const { data: savedSimulations = [], isLoading: isLoadingSimulations } = useSimulations();
   const createSimulation = useCreateSimulation();
+  const updateSimulation = useUpdateSimulation();
+  const deleteSimulation = useDeleteSimulation();
 
-  const handleSubmit = async (formData: SimulationFormData) => {
+  const handleSubmit = async (formData: SimulationFormData, shouldUpdate: boolean = false) => {
     setIsSimulating(true);
 
     // Simulate async operation
@@ -24,12 +27,21 @@ export default function Scene() {
     const outputs = runMockSimulation(formData);
     setCurrentOutputs(outputs);
 
-    // Save to database
+    // Save or update in database
     try {
-      await createSimulation.mutateAsync({
-        inputs: formData,
-        outputs,
-      });
+      if (shouldUpdate && loadedSimulationId) {
+        await updateSimulation.mutateAsync({
+          id: loadedSimulationId,
+          inputs: formData,
+          outputs,
+        });
+      } else {
+        const newSim = await createSimulation.mutateAsync({
+          inputs: formData,
+          outputs,
+        });
+        setLoadedSimulationId(newSim.id);
+      }
     } catch (error) {
       console.error('Failed to save simulation:', error);
     }
@@ -39,6 +51,26 @@ export default function Scene() {
 
   const handleLoadSimulation = (simulation: Simulation) => {
     setCurrentOutputs(simulation.outputs);
+    setLoadedSimulationId(simulation.id);
+  };
+
+  const handleDeleteSimulation = async (id: string) => {
+    if (confirm('Are you sure you want to delete this simulation?')) {
+      try {
+        await deleteSimulation.mutateAsync(id);
+        if (loadedSimulationId === id) {
+          setLoadedSimulationId(null);
+          setCurrentOutputs(null);
+        }
+      } catch (error) {
+        console.error('Failed to delete simulation:', error);
+      }
+    }
+  };
+
+  const handleNewSimulation = () => {
+    setLoadedSimulationId(null);
+    setCurrentOutputs(null);
   };
 
   return (
@@ -61,7 +93,10 @@ export default function Scene() {
               isLoading={isSimulating}
               savedSimulations={savedSimulations}
               onLoadSimulation={handleLoadSimulation}
+              onDeleteSimulation={handleDeleteSimulation}
+              onNewSimulation={handleNewSimulation}
               isLoadingSimulations={isLoadingSimulations}
+              loadedSimulationId={loadedSimulationId}
             />
           </div>
 

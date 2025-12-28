@@ -16,23 +16,16 @@ export function runMockSimulation(inputs: SimulationInputs): SimulationOutputs {
     chargingPower,
   } = inputs;
 
-  // Calculate theoretical maximum
   const theoreticalMaxPower = chargePointsCount * chargingPower;
 
   // Generate hourly data for a typical day
   const hourlyData: HourlyData[] = HOURLY_USAGE_PATTERN.map((usage, hour) => {
     const adjustedUsage = usage * arrivalMultiplier;
-    console.log('adjustedUsage', adjustedUsage);
-    console.log('chargePointsCount', chargePointsCount);
     const activePoints = Math.min(
       Math.round(chargePointsCount * adjustedUsage),
       chargePointsCount
     );
     const powerDemand = activePoints * chargingPower;
-
-    console.log('hour', hour);
-    console.log('powerDemand', powerDemand);
-    console.log('activePoints', activePoints);
 
     return {
       hour,
@@ -41,15 +34,9 @@ export function runMockSimulation(inputs: SimulationInputs): SimulationOutputs {
     };
   });
 
-  // Calculate actual max power from hourly data
   const actualMaxPower = Math.max(...hourlyData.map(d => d.powerDemand));
-
-  // Calculate concurrency factor
   const concurrencyFactor = (actualMaxPower / theoreticalMaxPower) * 100;
-
-  // Estimate yearly statistics
   const avgActivePoints = hourlyData.reduce((sum, d) => sum + d.activeChargePoints, 0) / 24;
-  const avgPowerDemand = hourlyData.reduce((sum, d) => sum + d.powerDemand, 0) / 24;
   
   // Average energy per charging session (assuming mix of short/long charges)
   const avgEnergyPerSession = (carConsumption / 100) * 50; // Average 50km charge
