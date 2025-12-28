@@ -2,6 +2,10 @@
 
 A web application to simulate and analyze electric vehicle charging patterns, power demand, and energy consumption.
 
+## Demo
+
+https://github.com/user-attachments/assets/cef06421-ff6f-43ab-a5d0-eaafc197f18e
+
 ## Features
 
 - **Simulation Parameters**: Configure number of charge points, arrival probability multiplier, car consumption, and charging power
