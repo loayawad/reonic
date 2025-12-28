@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Simulation } from './types';
 
+// Using identation is not production ready approach, but it's fine for the case of simplification
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 

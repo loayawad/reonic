@@ -54,7 +54,7 @@ export default function SimulationResults({
           </svg>
           <h3 className="mt-4 text-lg font-medium">No Simulation Yet</h3>
           <p className="mt-2">
-            Set your parameters and click &quot;Run Simulation&quot; to see results
+            Set your parameters and click &quot;Run Simulation&quot; to see results or load a saved simulation.
           </p>
         </div>
       </div>
