@@ -239,20 +239,6 @@ The mock simulation generates realistic outputs including:
 - Concurrency factor (actual/theoretical utilization)
 - Charging event statistics
 
-## Building for Production
-
-Using npm:
-```bash
-npm run build
-npm start
-```
-
-Or using yarn:
-```bash
-yarn build
-yarn start
-```
-
 ## API Endpoints (via Supabase)
 
 The application implements full CRUD operations:
@@ -261,6 +247,13 @@ The application implements full CRUD operations:
 - **READ**: Fetch all saved simulations, sorted by creation date
 - **UPDATE**: Modify existing simulation parameters and results
 - **DELETE**: Remove simulations from database
+
+## Testing
+
+<img width="629" height="647" alt="Screenshot 2025-12-28 at 15 10 04" src="https://github.com/user-attachments/assets/81f2da2d-58e7-45ad-ac34-05dbd0f0500a" />
+
+- Tests are not required but wanted to generate couple just for the sake of good practice
+- Mostly AI-generated (but ofc should be re-iterated on to make it better and handle things more precisely)
 
 ## Notes
 
