@@ -1,7 +1,7 @@
 import { SimulationInputs, SimulationOutputs, HourlyData } from './types';
 
 // Simplified arrival pattern (percentage of max usage by hour)
-const HOURLY_USAGE_PATTERN = [
+export const HOURLY_USAGE_PATTERN = [
   0.05, 0.03, 0.02, 0.02, 0.03, 0.05, // 00:00 - 06:00 (low usage at night)
   0.10, 0.15, 0.25, 0.30, 0.40, 0.45, // 06:00 - 12:00 (morning ramp up)
   0.50, 0.55, 0.60, 0.65, 0.70, 0.75, // 12:00 - 18:00 (peak hours)
