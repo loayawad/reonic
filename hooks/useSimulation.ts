@@ -5,8 +5,8 @@ import {
   getSimulation,
   updateSimulation,
   deleteSimulation,
-} from '@/lib/api';
-import { SimulationInputs, SimulationOutputs } from '@/lib/types';
+} from '../lib/api';
+import { SimulationInputs, SimulationOutputs } from '../lib/types';
 
 export function useSimulations() {
   return useQuery({

@@ -1,6 +1,7 @@
 'use client';
 
-import { SimulationOutputs } from '@/lib/types';
+import React from 'react';
+import { SimulationOutputs } from '../lib/types';
 import {
   LineChart,
   Line,
@@ -147,7 +148,7 @@ export default function SimulationResults({
               formatter={(value: number) => `${value.toFixed(2)} kW`}
               labelFormatter={(label) => `Hour: ${label}:00`}
             />
-            <Legend />
+            <Legend verticalAlign="top" height={36} />
             <Line
               type="monotone"
               dataKey="powerDemand"
@@ -182,7 +183,7 @@ export default function SimulationResults({
             <Tooltip
               labelFormatter={(label) => `Hour: ${label}:00`}
             />
-            <Legend />
+            <Legend verticalAlign="top" height={36} />
             <Bar
               dataKey="activeChargePoints"
               fill="#10b981"

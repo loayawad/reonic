@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
-import SimulationForm from '@/components/SimulationForm';
-import SimulationResults from '@/components/SimulationResults';
-import { SimulationFormData, SimulationOutputs, Simulation } from '@/lib/types';
-import { runMockSimulation } from '@/lib/mockSimulation';
-import { useSimulations, useCreateSimulation } from '@/hooks/useSimulation';
+import React, { useState } from 'react';
+import SimulationForm from '../../components/SimulationForm';
+import SimulationResults from '../../components/SimulationResults';
+import { SimulationFormData, SimulationOutputs, Simulation } from '../../lib/types';
+import { runMockSimulation } from '../../lib/mockSimulation';
+import { useSimulations, useCreateSimulation } from '../../hooks/useSimulation';
 
 export default function Scene() {
   const [currentOutputs, setCurrentOutputs] = useState<SimulationOutputs | null>(null);
@@ -42,7 +42,7 @@ export default function Scene() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 text-black">
       <div className="container mx-auto px-4 py-8">
         <header className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900">

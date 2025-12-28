@@ -1,137 +1,36 @@
-# EV Charging Simulator
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A web application to simulate and analyze electric vehicle charging patterns, power demand, and energy consumption.
+## Getting Started
 
-## Features
-
-- **Simulation Parameters**: Configure number of charge points, arrival probability multiplier, car consumption, and charging power
-- **Visual Results**: Interactive charts showing hourly power demand and active charge points
-- **Key Metrics**: Total energy charged, concurrency factor, peak power demand, and charging event statistics
-- **History**: Save and load previous simulations from the database
-
-## Tech Stack
-
-- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
-- **Charts**: Recharts
-- **State Management**: TanStack React Query
-- **Database**: Supabase
-- **Simulation**: Mock simulation with realistic probability distributions
-
-## Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-- Supabase account and project
-
-## Setup Instructions
-
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Setup Supabase
-
-Create a Supabase project at [supabase.com](https://supabase.com) and run the following SQL to create the required table:
-
-```sql
--- Create simulations table
-create table simulations (
-  id uuid default gen_random_uuid() primary key,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null,
-  inputs jsonb not null,
-  outputs jsonb not null
-);
-
--- Create index for faster queries
-create index simulations_created_at_idx on simulations(created_at desc);
-```
-
-### 3. Environment Variables
-
-Create a `.env.local` file in the root directory:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
-
-You can find these values in your Supabase project settings under API.
-
-### 4. Run the Development Server
+First, run the development server:
 
 ```bash
 npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## How to Use
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-1. **Set Parameters** (left panel):
-   - Number of charge points (1-100)
-   - Arrival probability multiplier (20-200%)
-   - Car consumption (kWh per 100km)
-   - Charging power per chargepoint (kW)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-2. **Run Simulation**: Click the "Run Simulation" button
+## Learn More
 
-3. **View Results** (right panel):
-   - Key metrics including total energy, concurrency factor, and peak power
-   - Hourly power demand chart for a typical day
-   - Active charge points distribution
-   - Charging events breakdown (daily/weekly/monthly)
+To learn more about Next.js, take a look at the following resources:
 
-4. **Load Previous Simulations**: Use the dropdown to load and view past simulation results
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Project Structure
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-```
-├── app/
-│   ├── layout.tsx          # Root layout with providers
-│   ├── page.tsx            # Main page entry point
-│   ├── scene.tsx           # Main scene with business logic
-│   ├── providers.tsx       # React Query provider setup
-│   └── globals.css         # Global styles
-├── components/
-│   ├── SimulationForm.tsx  # Input parameters form
-│   └── SimulationResults.tsx # Results visualization
-├── hooks/
-│   └── useSimulation.ts    # React Query hooks for API
-├── lib/
-│   ├── types.ts            # TypeScript type definitions
-│   ├── supabase.ts         # Supabase client setup
-│   ├── api.ts              # API functions
-│   └── mockSimulation.ts   # Mock simulation logic
-└── README.md
-```
+## Deploy on Vercel
 
-## Simulation Logic
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-The simulation uses probability distributions from real-world data:
-
-- **Arrival Probabilities**: Hourly probabilities (peak during business hours)
-- **Charging Demands**: Distribution of charging needs from 0-300km range
-- **Time Resolution**: 15-minute intervals over a full year (35,040 ticks)
-
-The mock simulation generates realistic outputs including:
-- Total energy consumption
-- Peak power demand vs. theoretical maximum
-- Concurrency factor (actual/theoretical utilization)
-- Charging event statistics
-
-## Building for Production
-
-```bash
-npm run build
-npm start
-```
-
-## Notes
-
-- The simulation is mocked for demonstration purposes
-- All inputs are validated and stored in the database
-- Results are automatically saved when running a new simulation
-- The UI is responsive and works on different screen sizes
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

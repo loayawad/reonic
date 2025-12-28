@@ -22,11 +22,17 @@ export function runMockSimulation(inputs: SimulationInputs): SimulationOutputs {
   // Generate hourly data for a typical day
   const hourlyData: HourlyData[] = HOURLY_USAGE_PATTERN.map((usage, hour) => {
     const adjustedUsage = usage * arrivalMultiplier;
+    console.log('adjustedUsage', adjustedUsage);
+    console.log('chargePointsCount', chargePointsCount);
     const activePoints = Math.min(
       Math.round(chargePointsCount * adjustedUsage),
       chargePointsCount
     );
     const powerDemand = activePoints * chargingPower;
+
+    console.log('hour', hour);
+    console.log('powerDemand', powerDemand);
+    console.log('activePoints', activePoints);
 
     return {
       hour,

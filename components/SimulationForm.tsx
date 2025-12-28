@@ -189,7 +189,7 @@ export default function SimulationForm({
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-6 bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition-colors"
+          className="hover:cursor-pointer w-full mt-6 bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition-colors"
         >
           {isLoading ? 'Running Simulation...' : 'Run Simulation'}
         </button>
