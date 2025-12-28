@@ -239,48 +239,6 @@ The mock simulation generates realistic outputs including:
 - Concurrency factor (actual/theoretical utilization)
 - Charging event statistics
 
-## Testing
-
-The project includes comprehensive unit tests for the simulation logic using Vitest.
-
-### Run Tests
-
-Using npm:
-```bash
-npm test
-```
-
-Or using yarn:
-```bash
-yarn test
-```
-
-### Test Coverage
-
-The test suite includes **17 test cases** covering:
-
-- ✅ **Basic Simulation Tests**: Output structure, theoretical max calculations, concurrency factor
-- ✅ **Edge Cases**: Single chargepoint, many chargepoints, different multipliers and power levels
-- ✅ **Data Validation**: Non-negative values, consistency checks, boundary conditions
-- ✅ **Concurrency Behavior**: Verification that concurrency decreases with more chargepoints
-- ✅ **Peak Hour Behavior**: Validates higher demand during peak hours vs. night hours
-
-**Test Results:**
-```
-✓ lib/mockSimulation.test.ts (17 tests) 5ms
-  Test Files  1 passed (1)
-       Tests  17 passed (17)
-```
-
-### Test UI
-
-For interactive test visualization:
-```bash
-npm run test:ui
-# or
-yarn test:ui
-```
-
 ## Building for Production
 
 Using npm:
